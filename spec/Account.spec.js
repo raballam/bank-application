@@ -62,4 +62,14 @@ describe("Account Tests: ", () => {
         // Assert
         expect(testAccount.getBalance()).toBe(testDeposit1 + testDeposit2);
     });
+
+    it("should not change balance is funds deposited are null", () => { 
+        // Arrange
+        testAccount = new Account(testName);
+        testDeposit1 = null;
+        // Act
+        testAccount.deposit(testDeposit1);
+        // Assert
+        expect(testAccount.getBalance()).toBe(0);
+    });
 });
