@@ -1,7 +1,7 @@
 import Account from "../src/Account.js";
 
 describe("Account Tests: ", () => {
-    let testAccount, testName, testDeposit1, testDeposit2;
+    let testAccount, testName, testDeposit1, testDeposit2, testWithdrawal;
 
     beforeEach(() => {
         testName = "Test Name";
@@ -73,5 +73,16 @@ describe("Account Tests: ", () => {
         // Act
         // Assert
         expect(() => testAccount.deposit(testDeposit1)).toThrowError(Error);
+    });
+
+    it("should decrease the balance when funds are withdrawn", () => { 
+        // Arrange
+        testDeposit1 = 100;
+        testAccount.deposit(testDeposit1);
+        testWithdrawal = 75;
+        // Act
+        testAccount.withdraw(testWithdrawal);
+        // Assert
+        expect(testAccount.getBalance()).toBe(testDeposit1 - testWithdrawal);
     });
 });
