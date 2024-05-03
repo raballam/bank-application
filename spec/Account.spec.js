@@ -25,7 +25,7 @@ describe("Account Tests: ", () => {
         testName = null;
         // Act
         // Assert
-        expect(testAccount = new Account(testName).toThrowError())
-     });
+        expect(() => new Account(testName)).toThrowError(Error)
+    });
 
 });
