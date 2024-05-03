@@ -1,7 +1,7 @@
 import Account from "../src/Account.js";
 
 describe("Account Tests: ", () => {
-    let testAccount, testName, testDeposit1, testDeposit2, testWithdrawal;
+    let testAccount, testName, testDeposit1, testDeposit2, testWithdrawal, testBalance;
 
     beforeEach(() => {
         testName = "Test Name";
@@ -38,7 +38,7 @@ describe("Account Tests: ", () => {
         expect(testAccount.getBalance()).toBe(0);
     });
 
-    it("should increase balance when funds are deposited when balance is 0", () => { 
+    it("should increase balance when funds are deposited when balance is 0", () => {
         // Arrange
         testDeposit1 = 50;
         // Act
@@ -58,7 +58,7 @@ describe("Account Tests: ", () => {
         expect(testAccount.getBalance()).toBe(testDeposit1 + testDeposit2);
     });
 
-    it("should throw an error if negative funds deposited", () => { 
+    it("should throw an error if negative funds deposited", () => {
         // Arrange
         testDeposit1 = -50;
         // Act
@@ -66,7 +66,7 @@ describe("Account Tests: ", () => {
         expect(() => testAccount.deposit(testDeposit1)).toThrowError("Cannot deposit negative funds");
     });
 
-    it("should decrease the balance when funds are withdrawn", () => { 
+    it("should decrease the balance when funds are withdrawn", () => {
         // Arrange
         testDeposit1 = 100;
         testAccount.deposit(testDeposit1);
@@ -77,7 +77,7 @@ describe("Account Tests: ", () => {
         expect(testAccount.getBalance()).toBe(testDeposit1 - testWithdrawal);
     });
 
-    it("should throw an error if negative funds withdrawn", () => { 
+    it("should throw an error if negative funds withdrawn", () => {
         // Arrange
         testWithdrawal = -10;
         // Act
@@ -85,7 +85,7 @@ describe("Account Tests: ", () => {
         expect(() => testAccount.withdraw(testWithdrawal)).toThrowError("Cannot withdraw negative funds");
     });
     
-    it("should throw an error if attempts to withdraw more than balance", () => { 
+    it("should throw an error if attempts to withdraw more than balance", () => {
         // Arrange
         testDeposit1 = 10;
         testAccount.deposit(testDeposit1);
@@ -93,5 +93,16 @@ describe("Account Tests: ", () => {
         // Act
         // Assert
         expect(() => testAccount.withdraw(testWithdrawal)).toThrowError("Insufficient funds")
+    });
+
+    it("should allow full balance to be withdrawn", () => {
+        // Arrange
+        testBalance = 50;
+        testAccount.deposit(testBalance);
+        testWithdrawal = 50;
+        // Act
+        testAccount.withdraw(testWithdrawal);
+        // Assert
+        expect(testAccount.getBalance()).toBe(0);
     });
 });
