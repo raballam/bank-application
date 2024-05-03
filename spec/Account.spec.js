@@ -5,7 +5,7 @@ describe("Account Tests: ", () => {
 
     beforeEach(() => {
         testName = "Test Name";
-        testAccount;
+        testAccount = new Account(testName);
     });
 
     it("should be instance of Account", () => {
@@ -18,8 +18,6 @@ describe("Account Tests: ", () => {
 
     it("should have a name", () => {
         // Arrange
-        testName = "Test Name";
-        testAccount = new Account(testName);
         // Act
         // Assert
         expect(testAccount.name).toBe(testName);
@@ -35,7 +33,6 @@ describe("Account Tests: ", () => {
     
     it("should have an initial balance of 0", () => {
         // Arrange
-        testAccount = new Account(testName);
         // Act
         // Assert
         expect(testAccount.getBalance()).toBe(0);
@@ -43,7 +40,6 @@ describe("Account Tests: ", () => {
 
     it("should increase balance when funds are deposited when balance is 0", () => { 
         // Arrange
-        testAccount = new Account(testName);
         testDeposit1 = 50;
         // Act
         testAccount.deposit(testDeposit1);
@@ -53,7 +49,6 @@ describe("Account Tests: ", () => {
 
     it("should increase balance when funds are deposited when balance is not 0", () => {
         // Arrange
-        testAccount = new Account(testName);
         testDeposit1 = 50;
         testAccount.deposit(testDeposit1);
         testDeposit2 = 10;
@@ -65,11 +60,18 @@ describe("Account Tests: ", () => {
 
     it("should not change balance is funds deposited are null", () => { 
         // Arrange
-        testAccount = new Account(testName);
         testDeposit1 = null;
         // Act
         testAccount.deposit(testDeposit1);
         // Assert
         expect(testAccount.getBalance()).toBe(0);
+    });
+
+    it("should throw an error if negative funds deposited", () => { 
+        // Arrange
+        testDeposit1 = -50;
+        // Act
+        // Assert
+        expect(() => testAccount.deposit(testDeposit1)).toThrowError(Error);
     });
 });
