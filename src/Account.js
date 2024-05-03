@@ -17,6 +17,7 @@ export default class Account {
 
     withdraw(funds) { 
         if (funds < 0) throw new Error("Cannot withdraw negative funds");
+        if (funds > this.#balance) throw new Error("Insufficient funds")
         this.#balance -= funds;
     }
  };

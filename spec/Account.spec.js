@@ -28,7 +28,7 @@ describe("Account Tests: ", () => {
         testName = null;
         // Act
         // Assert
-        expect(() => new Account(testName)).toThrowError(Error)
+        expect(() => new Account(testName)).toThrowError("Name cannot be null")
     });
     
     it("should have an initial balance of 0", () => {
@@ -63,7 +63,7 @@ describe("Account Tests: ", () => {
         testDeposit1 = -50;
         // Act
         // Assert
-        expect(() => testAccount.deposit(testDeposit1)).toThrowError(Error);
+        expect(() => testAccount.deposit(testDeposit1)).toThrowError("Cannot deposit negative funds");
     });
 
     it("should decrease the balance when funds are withdrawn", () => { 
@@ -82,7 +82,16 @@ describe("Account Tests: ", () => {
         testWithdrawal = -10;
         // Act
         // Assert
-        expect(() => testAccount.withdraw(testWithdrawal)).toThrowError(Error);
+        expect(() => testAccount.withdraw(testWithdrawal)).toThrowError("Cannot withdraw negative funds");
     });
     
+    it("should throw an error if attempts to withdraw more than balance", () => { 
+        // Arrange
+        testDeposit1 = 10;
+        testAccount.deposit(testDeposit1);
+        testWithdrawal = 20;
+        // Act
+        // Assert
+        expect(() => testAccount.withdraw(testWithdrawal)).toThrowError("Insufficient funds")
+    });
 });
