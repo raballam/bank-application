@@ -1,7 +1,7 @@
 import Account from "../src/Account.js";
 
 describe("Account Tests: ", () => {
-    let testAccount, testName, testDeposit;
+    let testAccount, testName, testDeposit1, testDeposit2;
 
     beforeEach(() => {
         testName = "Test Name";
@@ -41,14 +41,25 @@ describe("Account Tests: ", () => {
         expect(testAccount.getBalance()).toBe(0);
     });
 
-    it("should increase balance when funds are deposited", () => { 
+    it("should increase balance when funds are deposited when balance is 0", () => { 
         // Arrange
         testAccount = new Account(testName);
-        testDeposit = 50;
+        testDeposit1 = 50;
         // Act
-        testAccount.deposit(testDeposit);
+        testAccount.deposit(testDeposit1);
         // Assert
-        expect(testAccount.getBalance()).toBe(testDeposit);
+        expect(testAccount.getBalance()).toBe(testDeposit1);
     });
 
+    it("should increase balance when funds are deposited when balance is not 0", () => {
+        // Arrange
+        testAccount = new Account(testName);
+        testDeposit1 = 50;
+        testAccount.deposit(testDeposit1);
+        testDeposit2 = 10;
+        // Act
+        testAccount.deposit(testDeposit2);
+        // Assert
+        expect(testAccount.getBalance()).toBe(testDeposit1 + testDeposit2);
+    });
 });
