@@ -1,7 +1,7 @@
 import Account from "../src/Account.js";
 
 describe("Account Tests: ", () => {
-    let testAccount, testName;
+    let testAccount, testName, testDeposit;
 
     beforeEach(() => {
         testName = "Test Name";
@@ -39,6 +39,16 @@ describe("Account Tests: ", () => {
         // Act
         // Assert
         expect(testAccount.getBalance()).toBe(0);
+    });
+
+    it("should increase balance when funds are deposited", () => { 
+        // Arrange
+        testAccount = new Account(testName);
+        testDeposit = 50;
+        // Act
+        testAccount.deposit(testDeposit);
+        // Assert
+        expect(testAccount.getBalance()).toBe(testDeposit);
     });
 
 });
