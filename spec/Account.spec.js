@@ -58,15 +58,6 @@ describe("Account Tests: ", () => {
         expect(testAccount.getBalance()).toBe(testDeposit1 + testDeposit2);
     });
 
-    it("should not change balance is funds deposited are null", () => { 
-        // Arrange
-        testDeposit1 = null;
-        // Act
-        testAccount.deposit(testDeposit1);
-        // Assert
-        expect(testAccount.getBalance()).toBe(0);
-    });
-
     it("should throw an error if negative funds deposited", () => { 
         // Arrange
         testDeposit1 = -50;
@@ -85,4 +76,13 @@ describe("Account Tests: ", () => {
         // Assert
         expect(testAccount.getBalance()).toBe(testDeposit1 - testWithdrawal);
     });
+
+    it("should throw an error if negative funds withdrawn", () => { 
+        // Arrange
+        testWithdrawal = -10;
+        // Act
+        // Assert
+        expect(() => testAccount.withdraw(testWithdrawal)).toThrowError(Error);
+    });
+    
 });

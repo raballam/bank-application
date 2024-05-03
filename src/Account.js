@@ -16,6 +16,7 @@ export default class Account {
     }
 
     withdraw(funds) { 
+        if (funds < 0) throw new Error("Cannot withdraw negative funds");
         this.#balance -= funds;
     }
  };
