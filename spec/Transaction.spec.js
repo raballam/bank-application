@@ -1,7 +1,7 @@
 import Transaction from "../src/Transaction.js";
 
 describe("Transaction Tests: ", () => {
-    let testType, testTransaction, testAmount;
+    let testType, testTransaction, testAmount, testBalance;
 
     it("should return credit if type is credit", () => {
         // Arrange
@@ -28,5 +28,14 @@ describe("Transaction Tests: ", () => {
         // Act
         // Assert
         expect(testTransaction.getAmount()).toBe(testAmount);
+    });
+    
+    it("should return the total balance after the transaction", () => {
+        // Arrange
+        testBalance = 100;
+        testTransaction = new Transaction(testType, testAmount, testBalance);
+        // Act
+        // Assert
+        expect(testTransaction.getBalance()).toBe(testBalance);
     });
 });
