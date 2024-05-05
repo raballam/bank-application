@@ -1,7 +1,7 @@
 import Transaction from "../src/Transaction.js";
 
 describe("Transaction Tests: ", () => {
-    let testType, testTransaction, testAmount, testBalance;
+    let testType, testTransaction, testAmount, testBalance, testDate;
 
     it("should return credit if type is credit", () => {
         // Arrange
@@ -37,5 +37,14 @@ describe("Transaction Tests: ", () => {
         // Act
         // Assert
         expect(testTransaction.getBalance()).toBe(testBalance);
+    });
+
+    it("should return the date of the transaction", () => {
+        // Arrange
+        testDate = "12/12/2024";
+        testTransaction = new Transaction(testType, testAmount, testBalance, testDate);
+        // Act
+        // Assert
+        expect(testTransaction.getDate()).toBe(testDate);
     });
 });
