@@ -91,4 +91,15 @@ describe("Transaction Tests: ", () => {
         // Assert
         expect(testTransaction.getDebit).toHaveBeenCalled();
     });
+
+    it("should call getCredit when printTransaction is called", () => {
+        // Arrange
+        testTransaction = new Transaction(testType, testAmount, testBalance, testDate);
+        spyOn(testTransaction, 'getCredit').and.callThrough();
+
+        // Act
+        testTransaction.printTransaction();
+        // Assert
+        expect(testTransaction.getCredit).toHaveBeenCalled();
+    });
 });
