@@ -1,3 +1,4 @@
+import Transaction from "./Transaction.js";
 export default class Account {
     constructor(name) {
         if (name === null) throw new Error("Name cannot be null");
@@ -5,14 +6,16 @@ export default class Account {
     };
 
     #balance = 0;
+    transactions = [];
 
     getBalance() {
         return this.#balance;
     };
 
-    deposit(funds) {
+    deposit(funds, date) {
         if (funds < 0) throw new Error("Cannot deposit negative funds");
         this.#balance += funds;
+        this.transactions.unshift(new Transaction('debit', funds, this.#balance, date));
     };
 
     withdraw(funds) {

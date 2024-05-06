@@ -1,11 +1,19 @@
 import Account from "../src/Account.js";
 
 describe("Account Tests: ", () => {
-    let testAccount, testName, testDeposit1, testDeposit2, testWithdrawal, testBalance;
+    let testAccount, testName, testDeposit1, testDeposit2, testWithdrawal, testBalance, testDate, actual;
 
     beforeEach(() => {
         testName = "Test Name";
         testAccount = new Account(testName);
+    });
+
+    afterEach(() => {
+        testDeposit1 = 0;
+        testDeposit2 = 0;
+        testWithdrawal = 0;
+        testBalance = 0;
+        testDate = "12/12/2024";
     });
 
     it("should be instance of Account", () => {
@@ -104,5 +112,14 @@ describe("Account Tests: ", () => {
         testAccount.withdraw(testWithdrawal);
         // Assert
         expect(testAccount.getBalance()).toBe(0);
+    });
+
+    it("should add a transaction to the transactions array when a deposit is made", () => {
+        // Arrange
+        actual = testAccount.transactions.length;
+        // Act
+        testAccount.deposit(testDeposit1, testDate);
+        // Assert
+        expect(testAccount.transactions.length).toBe(actual + 1);
     });
 });
