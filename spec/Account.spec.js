@@ -208,4 +208,13 @@ describe("Account Tests: ", () => {
         // Assert
         expect(testAccount.getBalance()).toBe(-500);
     });
+
+    it("should have a printer that calls getName()", () => {
+        // Arrange
+        spyOn(testAccount, 'getName').and.callThrough();
+        // Act
+        testAccount.printAccountDetails();
+        // Assert
+        expect(testAccount.getName).toHaveBeenCalled();
+    })
 });

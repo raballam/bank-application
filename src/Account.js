@@ -4,11 +4,15 @@ export default class Account {
         if (name === null) throw new Error("Name cannot be null");
         this.name = name;
     };
-
+    #name;
     #balance = 0;
     transactions = [];
     overdraftEnabled = false;
     overdraftLimit;
+
+    getName() {
+        return this.#name;
+    }
 
     getBalance() {
         return this.#balance;
@@ -41,4 +45,8 @@ export default class Account {
     setOverdraft(limit) {
         this.overdraftLimit = limit;
     };
+
+    printAccountDetails() {
+        console.log(`${this.getName()}`);
+    }
  };

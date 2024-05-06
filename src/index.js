@@ -8,9 +8,11 @@ let date3 = "14/01/2012";
 let firstDeposit = 1000;
 let secondDeposit = 2000;
 let firstWithdrawal = 500;
+let secondWithdrawal = 3000;
 
 account.deposit(firstDeposit, date1);
 account.deposit(secondDeposit, date2);
 account.withdraw(firstWithdrawal, date3);
 
 StatementPrinter.printStatement(account);
+
