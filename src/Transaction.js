@@ -5,12 +5,14 @@ export default class Transaction {
         this.#balance = balance;
         this.#date = date;
         if (type = 'debit') this.#debit = amount;
+        if (type = 'credit') this.#credit = amount;
     }
     #type;
     #amount;
     #balance;
     #date;
     #debit;
+    #credit;
 
     getType() {
         return this.#type;
@@ -26,5 +28,8 @@ export default class Transaction {
     }
     getDebit() {
         return this.#debit;
+    }
+    getCredit() {
+        return this.#credit;
     }
 };

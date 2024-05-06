@@ -58,4 +58,15 @@ describe("Transaction Tests: ", () => {
         // Assert
         expect(testTransaction.getDebit()).toBe(testAmount);
     });
+
+    it("should set credit to amount if type is credit", () => {
+        // Arrange
+        testDate = "12/12/2024";
+        testType = 'credit';
+        testAmount = 500;
+        testTransaction = new Transaction(testType, testAmount, testBalance, testDate);
+        // Act
+        // Assert
+        expect(testTransaction.getCredit()).toBe(testAmount);
+    });
 });
