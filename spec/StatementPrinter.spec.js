@@ -44,4 +44,34 @@ describe("Statement Printer Tests: ", () => {
         // Assert
         expect(testTransaction.printTransaction).toHaveBeenCalledTimes(2);
     })
+
+    it("should format transactions correctly", () => {
+        // Arrange
+        const testTransaction = {
+            date: "12/12/2024",
+            credit: 2000,
+            debit: undefined,
+            balance: 2000,
+            printTransaction: function () {
+                console.log(`${this.date.padEnd(10)} || ${this.credit ? this.credit.toFixed(2).padStart(7) : ''.padEnd(7)} || ${this.debit ? this.debit().toFixed(2).padStart(7) : ''.padEnd(7)} || ${this.balance.toFixed(2).padStart(7)}`);
+            }
+        }
+        testAccount.transactions.unshift(testTransaction);
+        const testTransaction2 = {
+            date: "13/12/2024",
+            credit: undefined,
+            debit: 500,
+            balance: 1500,
+            printTransaction: function () {
+                console.log(`${this.date.padEnd(10)} || ${this.credit ? this.credit().toFixed(2).padStart(7) : ''.padEnd(7)} || ${this.debit ? this.debit.toFixed(2).padStart(7) : ''.padEnd(7)} || ${this.balance.toFixed(2).padStart(7)}`);
+            }
+        }
+        testAccount.transactions.unshift(testTransaction2);
+        // Act
+        StatementPrinter.printStatement(testAccount);
+        // Assert
+        expect(clgSpy).toHaveBeenCalledWith("date       || credit  || debit   || balance");
+        expect(clgSpy).toHaveBeenCalledWith("13/12/2024 ||         ||  500.00 || 1500.00");
+        expect(clgSpy).toHaveBeenCalledWith("12/12/2024 || 2000.00 ||         || 2000.00");
+    })
 })
