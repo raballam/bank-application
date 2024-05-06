@@ -33,6 +33,6 @@ export default class Transaction {
         return this.#credit;
     }
     printTransaction = () => {
-        console.log(`${this.#date.padEnd(10)} || ${this.#credit ? this.#credit.toFixed(2).padStart(7) : ''.padEnd(7)} || ${this.#debit ? this.#debit.toFixed(2).padStart(7) : ''.padEnd(7)} || ${this.#balance.toFixed(2).padStart(7)}`);
+        console.log(`${this.getDate().padEnd(10)} || ${this.#credit ? this.getCredit().toFixed(2).padStart(7) : ''.padEnd(7)} || ${this.#debit ? this.getDebit().toFixed(2).padStart(7) : ''.padEnd(7)} || ${this.getBalance().toFixed(2).padStart(7)}`);
     };
 };

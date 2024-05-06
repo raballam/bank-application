@@ -86,6 +86,9 @@ describe("Transaction Tests: ", () => {
         expect(testTransaction.getCredit()).toBe(testAmount);
     });
 
+    //! The below tests are xed out as they now fail because I changed the code to no longer
+    //! use this. However, I kept them in as they were part of the process.
+
     xit("should call getDate when printTransaction is called", () => {
         // Arrange
         testType = 'debit';
@@ -133,6 +136,8 @@ describe("Transaction Tests: ", () => {
         // Assert
         expect(testTransaction.getBalance).toHaveBeenCalled();
     });
+
+    //! End of xed tests.
 
     it("should log the correct output when type is credit and amount is 4 digits", () => {
         // Arrange
