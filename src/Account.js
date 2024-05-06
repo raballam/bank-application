@@ -6,8 +6,9 @@ export default class Account {
     };
 
     #balance = 0;
-    overdraftEnabled = false;
     transactions = [];
+    overdraftEnabled = false;
+    overdraftLimit;
 
     getBalance() {
         return this.#balance;
@@ -21,7 +22,7 @@ export default class Account {
 
     withdraw(funds, date) {
         if (funds < 0) throw new Error("Cannot withdraw negative funds");
-        if (funds > this.#balance) throw new Error("Insufficient funds")
+        if (!this.overdraftEnabled && funds > this.#balance) throw new Error("Insufficient funds")
         this.#balance -= funds;
         this.transactions.unshift(new Transaction('debit', funds, this.#balance, date));
     };
@@ -32,5 +33,9 @@ export default class Account {
 
     disableOverdraft() {
         this.overdraftEnabled = false;
+    };
+
+    setOverdraft(limit) {
+        this.overdraftLimit = limit;
     };
  };

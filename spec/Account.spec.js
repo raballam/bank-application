@@ -2,7 +2,7 @@ import Account from "../src/Account.js";
 import Transaction from "../src/Transaction.js";
 
 describe("Account Tests: ", () => {
-    let testAccount, testName, testDeposit1, testDeposit2, testWithdrawal, testBalance, testDate, initial;
+    let testAccount, testName, testDeposit1, testDeposit2, testWithdrawal, testBalance, testDate, initial, testLimit;
 
     beforeEach(() => {
         testName = "Test Name";
@@ -160,4 +160,27 @@ describe("Account Tests: ", () => {
         // Assert
         expect(testAccount.overdraftEnabled).toBeFalse();
     });
+
+    it("should set overdraft limit with setOverdraft", () => {
+        // Arrange
+        testLimit = 500;
+        // Act
+        testAccount.setOverdraft(testLimit);
+        // Assert
+        expect(testAccount.overdraftLimit).toBe(testLimit);
+    });
+
+    it("should not throw an error if amount greater than balance but less than limit is withdrawn", () => {
+        // Arrange
+        testLimit = 1000;
+        testDeposit1 = 500;
+        testAccount.enableOverdraft();
+        testAccount.setOverdraft(testLimit);
+        testAccount.deposit(testDeposit1);
+        testWithdrawal = 1000;
+        // Act
+        // Assert
+        expect(() => testAccount.withdraw(testWithdrawal)).not.toThrowError();
+
+    })
 });
