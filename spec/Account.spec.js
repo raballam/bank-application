@@ -170,17 +170,28 @@ describe("Account Tests: ", () => {
         expect(testAccount.overdraftLimit).toBe(testLimit);
     });
 
-    it("should not throw an error if amount greater than balance but less than limit is withdrawn", () => {
+    it("should not throw an error if amount greater than balance and overdraftEnabled is true", () => {
         // Arrange
-        testLimit = 1000;
         testDeposit1 = 500;
         testAccount.enableOverdraft();
-        testAccount.setOverdraft(testLimit);
+        // testAccount.setOverdraft(testLimit);
         testAccount.deposit(testDeposit1);
         testWithdrawal = 1000;
         // Act
         // Assert
-        expect(() => testAccount.withdraw(testWithdrawal)).not.toThrowError();
+        expect(() => testAccount.withdraw(testWithdrawal)).not.toThrowError("Insufficient funds");
+    });
 
-    })
+    it("should throw an error if overdraftEnabled is true but withdrawal is greater than balance + overdraftLimit", () => {
+        // Arrange
+        testLimit = 500;
+        testDeposit1 = 1000;
+        testAccount.enableOverdraft();
+        testAccount.setOverdraft(testLimit);
+        testAccount.deposit(testDeposit1);
+        testWithdrawal = 2000;
+        // Act
+        // Assert
+        expect(() => testAccount.withdraw(testWithdrawal)).toThrowError("Insufficient funds")
+    });
 });

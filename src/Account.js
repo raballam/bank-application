@@ -22,9 +22,12 @@ export default class Account {
 
     withdraw(funds, date) {
         if (funds < 0) throw new Error("Cannot withdraw negative funds");
-        if (!this.overdraftEnabled && funds > this.#balance) throw new Error("Insufficient funds")
-        this.#balance -= funds;
-        this.transactions.unshift(new Transaction('debit', funds, this.#balance, date));
+        if (!this.overdraftEnabled && funds > this.#balance || this.overdraftEnabled && funds > this.#balance + this.overdraftLimit) {
+            throw new Error("Insufficient funds")
+        } else {
+            this.#balance -= funds;
+            this.transactions.unshift(new Transaction('debit', funds, this.#balance, date));
+        }
     };
 
     enableOverdraft() {
