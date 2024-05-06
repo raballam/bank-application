@@ -15,13 +15,13 @@ export default class Account {
     deposit(funds, date) {
         if (funds < 0) throw new Error("Cannot deposit negative funds");
         this.#balance += funds;
-        this.transactions.unshift(new Transaction('debit', funds, this.#balance, date));
+        this.transactions.unshift(new Transaction('credit', funds, this.#balance, date));
     };
 
     withdraw(funds, date) {
         if (funds < 0) throw new Error("Cannot withdraw negative funds");
         if (funds > this.#balance) throw new Error("Insufficient funds")
         this.#balance -= funds;
-        this.transactions.unshift(new Transaction('credit', funds, this.#balance, date));
+        this.transactions.unshift(new Transaction('debit', funds, this.#balance, date));
     };
  };

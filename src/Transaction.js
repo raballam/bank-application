@@ -4,11 +4,14 @@ export default class Transaction {
         this.#amount = amount;
         this.#balance = balance;
         this.#date = date;
+        if (type = 'debit') this.#debit = amount;
     }
     #type;
     #amount;
     #balance;
     #date;
+    #debit;
+
     getType() {
         return this.#type;
     }
@@ -20,5 +23,8 @@ export default class Transaction {
     }
     getDate() {
         return this.#date;
+    }
+    getDebit() {
+        return this.#debit;
     }
 };

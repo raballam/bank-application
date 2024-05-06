@@ -47,4 +47,15 @@ describe("Transaction Tests: ", () => {
         // Assert
         expect(testTransaction.getDate()).toBe(testDate);
     });
+
+    it("should set debit to amount if type is debit", () => {
+        // Arrange
+        testDate = "12/12/2024";
+        testType = 'debit';
+        testAmount = 500;
+        testTransaction = new Transaction(testType, testAmount, testBalance, testDate);
+        // Act
+        // Assert
+        expect(testTransaction.getDebit()).toBe(testAmount);
+    });
 });
