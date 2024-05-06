@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 export default class Transaction {
     constructor(type, amount, balance, date) {
         this.#type = type;
@@ -33,6 +34,6 @@ export default class Transaction {
         return this.#credit;
     }
     printTransaction = () => {
-        console.log(`${this.getDate().padEnd(10)} || ${this.getCredit() ? this.getCredit().toFixed(2).padStart(7) : ''.padEnd(7)} || ${this.getDebit() ? this.getDebit().toFixed(2).padStart(7) : ''.padEnd(7)} || ${this.getBalance().toFixed(2).padStart(7)}`);
+        console.log(`${this.getDate().padEnd(10)} || ${this.getCredit() ? chalk.green(this.getCredit().toFixed(2).padStart(7)) : ''.padEnd(7)} || ${this.getDebit() ? chalk.red(this.getDebit().toFixed(2).padStart(7)) : ''.padEnd(7)} || ${this.getBalance().toFixed(2).padStart(7)}`);
     };
 };

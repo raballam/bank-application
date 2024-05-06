@@ -143,4 +143,12 @@ describe("Account Tests: ", () => {
             expect(transaction).toBeInstanceOf(Transaction);
         }
     });
+
+    it("should toggle overdraft on with enableOverdraft", () => {
+        // Arrange
+        // Act
+        testAccount.enableOverdraft();
+        // Assert
+        expect(testAccount.overdraftEnabled).toBeTrue();
+    });
 });

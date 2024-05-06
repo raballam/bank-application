@@ -4,5 +4,6 @@ export default class StatementPrinter {
         for (const transaction of account.transactions) {
             transaction.printTransaction();
         }
+        console.log();
     }
 }

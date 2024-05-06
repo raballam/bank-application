@@ -6,6 +6,7 @@ export default class Account {
     };
 
     #balance = 0;
+    overdraftEnabled = false;
     transactions = [];
 
     getBalance() {
@@ -23,5 +24,9 @@ export default class Account {
         if (funds > this.#balance) throw new Error("Insufficient funds")
         this.#balance -= funds;
         this.transactions.unshift(new Transaction('debit', funds, this.#balance, date));
+    };
+
+    enableOverdraft() {
+        this.overdraftEnabled = true;
     };
  };

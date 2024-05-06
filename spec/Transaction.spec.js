@@ -1,7 +1,7 @@
 import Transaction from "../src/Transaction.js";
 
 describe("Transaction Tests: ", () => {
-    let testType, testTransaction, testAmount, testBalance, testDate, clgSpy;
+    let testType, testTransaction, testAmount, testBalance, testDate, clgSpy, actual;
 
     beforeEach(() => {
         testDate = "12/12/2012";
@@ -18,6 +18,12 @@ describe("Transaction Tests: ", () => {
         testBalance = undefined;
         testDate = undefined;
     })
+
+    // Strips colours to easier match outputs (found regex using chatGPT)
+    function stripColours(text) {
+        const colorRegex = /\x1B\[[0-9;]*[JKmsu]/g;
+        return text.replace(colorRegex, '');
+    }
 
     it("should return credit if type is credit", () => {
         // Arrange
@@ -146,7 +152,8 @@ describe("Transaction Tests: ", () => {
         // Act
         testTransaction.printTransaction();
         // Assert
-        expect(clgSpy).toHaveBeenCalledWith("12/12/2012 || 1000.00 ||         || 1000.00")
+        actual = clgSpy.calls.argsFor(0)[0];  // Gets the actual logged input
+        expect(stripColours(actual)).toEqual("12/12/2012 || 1000.00 ||         || 1000.00")
     });
 
     it("should log the correct output when type is debit and 3 digits", () => {
@@ -158,6 +165,7 @@ describe("Transaction Tests: ", () => {
         // Act
         testTransaction.printTransaction();
         // Assert
-        expect(clgSpy).toHaveBeenCalledWith("12/12/2012 ||         ||  500.00 ||  500.00")
+        actual = clgSpy.calls.argsFor(0)[0];  // Gets the actual logged input
+        expect(stripColours(actual)).toEqual("12/12/2012 ||         ||  500.00 ||  500.00")
     });
 });
