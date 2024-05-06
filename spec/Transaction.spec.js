@@ -69,4 +69,26 @@ describe("Transaction Tests: ", () => {
         // Assert
         expect(testTransaction.getCredit()).toBe(testAmount);
     });
+
+    it("should call getDate when printTransaction is called", () => {
+        // Arrange
+        testTransaction = new Transaction(testType, testAmount, testBalance, testDate);
+        spyOn(testTransaction, 'getDate').and.callThrough();
+
+        // Act
+        testTransaction.printTransaction();
+        // Assert
+        expect(testTransaction.getDate).toHaveBeenCalled();
+    });
+
+    it("should call getDebit when printTransaction is called", () => {
+        // Arrange
+        testTransaction = new Transaction(testType, testAmount, testBalance, testDate);
+        spyOn(testTransaction, 'getDebit').and.callThrough();
+
+        // Act
+        testTransaction.printTransaction();
+        // Assert
+        expect(testTransaction.getDebit).toHaveBeenCalled();
+    });
 });

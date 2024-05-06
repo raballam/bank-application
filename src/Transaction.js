@@ -32,4 +32,7 @@ export default class Transaction {
     getCredit() {
         return this.#credit;
     }
+    printTransaction = () => {
+        console.log(this.getDate() + this.getDebit());
+    };
 };
