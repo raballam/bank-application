@@ -31,4 +31,17 @@ describe("Statement Printer Tests: ", () => {
         // Assert
         expect(testTransaction.printTransaction).toHaveBeenCalledTimes(1);
     })
+
+    it("should call transaction.printTransactions 2 times if 2 transactions in array", () => {
+        // Arrange
+        const testTransaction = {
+            printTransaction: jasmine.createSpy('printTransaction')
+        };
+        testAccount.transactions.unshift(testTransaction);
+        testAccount.transactions.unshift(testTransaction);
+        // Act
+        StatementPrinter.printStatement(testAccount);
+        // Assert
+        expect(testTransaction.printTransaction).toHaveBeenCalledTimes(2);
+    })
 })
