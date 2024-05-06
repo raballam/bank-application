@@ -151,4 +151,13 @@ describe("Account Tests: ", () => {
         // Assert
         expect(testAccount.overdraftEnabled).toBeTrue();
     });
+
+    it("should toggle overdraft off with disableOverdraft", () => {
+        // Arrange
+        testAccount.enableOverdraft();
+        // Act
+        testAccount.disableOverdraft();
+        // Assert
+        expect(testAccount.overdraftEnabled).toBeFalse();
+    });
 });

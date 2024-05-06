@@ -29,4 +29,8 @@ export default class Account {
     enableOverdraft() {
         this.overdraftEnabled = true;
     };
+
+    disableOverdraft() {
+        this.overdraftEnabled = false;
+    };
  };
