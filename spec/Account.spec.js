@@ -194,4 +194,18 @@ describe("Account Tests: ", () => {
         // Assert
         expect(() => testAccount.withdraw(testWithdrawal)).toThrowError("Insufficient funds")
     });
+
+    it("should allow withdrawal that takes account to overdraft limit", () => {
+        // Arrange
+        testLimit = 500;
+        testDeposit1 = 500;
+        testAccount.enableOverdraft();
+        testAccount.setOverdraft(testLimit);
+        testAccount.deposit(testDeposit1);
+        testWithdrawal = 1000;
+        // Act
+        testAccount.withdraw(testWithdrawal);
+        // Assert
+        expect(testAccount.getBalance()).toBe(-500);
+    });
 });
