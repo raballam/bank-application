@@ -1,5 +1,4 @@
-import Transaction from "../src/Transaction.js";
-import StatementPrinter from "../src/StatementPrinter.js"
+import StatementPrinter from "../src/StatementPrinter.js";
 
 describe("Statement Printer Tests: ", () => {
     let testAccount, clgSpy;
@@ -19,5 +18,17 @@ describe("Statement Printer Tests: ", () => {
         StatementPrinter.printStatement(testAccount);
         // Assert
         expect(clgSpy).toHaveBeenCalledWith("date       || credit  || debit   || balance")
+    })
+
+    it("should call transaction.printTransaction once if one transaction in array", () => {
+        // Arrange
+        const testTransaction = {
+            printTransaction: jasmine.createSpy('printTransaction')
+        };
+        testAccount.transactions.unshift(testTransaction);
+        // Act
+        StatementPrinter.printStatement(testAccount);
+        // Assert
+        expect(testTransaction.printTransaction).toHaveBeenCalledTimes(1);
     })
 })
