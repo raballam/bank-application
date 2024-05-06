@@ -1,4 +1,5 @@
 import Account from "../src/Account.js";
+import Transaction from "../src/Transaction.js";
 
 describe("Account Tests: ", () => {
     let testAccount, testName, testDeposit1, testDeposit2, testWithdrawal, testBalance, testDate, initial;
@@ -130,5 +131,16 @@ describe("Account Tests: ", () => {
         testAccount.withdraw(testWithdrawal, testDate);
         // Assert
         expect(testAccount.transactions.length).toBe(initial + 1);
+    });
+
+    it('should have transactions as an array of Transactions', () => {
+        // Arrange
+        testAccount.deposit(testDeposit1);
+        testAccount.withdraw(testWithdrawal);
+        // Act
+        // Assert
+        for (const transaction of testAccount.transactions) {
+            expect(transaction).toBeInstanceOf(Transaction);
+        }
     });
 });
