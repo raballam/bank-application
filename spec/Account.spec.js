@@ -1,7 +1,7 @@
 import Account from "../src/Account.js";
 
 describe("Account Tests: ", () => {
-    let testAccount, testName, testDeposit1, testDeposit2, testWithdrawal, testBalance, testDate, actual;
+    let testAccount, testName, testDeposit1, testDeposit2, testWithdrawal, testBalance, testDate, initial;
 
     beforeEach(() => {
         testName = "Test Name";
@@ -116,10 +116,19 @@ describe("Account Tests: ", () => {
 
     it("should add a transaction to the transactions array when a deposit is made", () => {
         // Arrange
-        actual = testAccount.transactions.length;
+        initial = testAccount.transactions.length;
         // Act
         testAccount.deposit(testDeposit1, testDate);
         // Assert
-        expect(testAccount.transactions.length).toBe(actual + 1);
+        expect(testAccount.transactions.length).toBe(initial + 1);
+    });
+
+    it("should add a transaction to the transactions array when a withdrawal is made", () => {
+        // Arrange
+        initial = testAccount.transactions.length;
+        // Act
+        testAccount.withdraw(testWithdrawal, testDate);
+        // Assert
+        expect(testAccount.transactions.length).toBe(initial + 1);
     });
 });
