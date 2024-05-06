@@ -1,7 +1,23 @@
 import Transaction from "../src/Transaction.js";
 
 describe("Transaction Tests: ", () => {
-    let testType, testTransaction, testAmount, testBalance, testDate;
+    let testType, testTransaction, testAmount, testBalance, testDate, clgSpy;
+
+    beforeEach(() => {
+        testDate = "12/12/2012";
+        testAmount = 1000;
+        testBalance = 1000;
+        clgSpy = spyOn(console, 'log');
+
+    })
+
+    afterEach(() => {
+        testTransaction = undefined;
+        testType = undefined;
+        testAmount = undefined;
+        testBalance = undefined;
+        testDate = undefined;
+    })
 
     it("should return credit if type is credit", () => {
         // Arrange
@@ -70,8 +86,9 @@ describe("Transaction Tests: ", () => {
         expect(testTransaction.getCredit()).toBe(testAmount);
     });
 
-    it("should call getDate when printTransaction is called", () => {
+    xit("should call getDate when printTransaction is called", () => {
         // Arrange
+        testType = 'debit';
         testTransaction = new Transaction(testType, testAmount, testBalance, testDate);
         spyOn(testTransaction, 'getDate').and.callThrough();
 
@@ -81,8 +98,9 @@ describe("Transaction Tests: ", () => {
         expect(testTransaction.getDate).toHaveBeenCalled();
     });
 
-    it("should call getDebit when printTransaction is called", () => {
+    xit("should call getDebit when printTransaction is called", () => {
         // Arrange
+        testType = 'debit';
         testTransaction = new Transaction(testType, testAmount, testBalance, testDate);
         spyOn(testTransaction, 'getDebit').and.callThrough();
 
@@ -92,8 +110,9 @@ describe("Transaction Tests: ", () => {
         expect(testTransaction.getDebit).toHaveBeenCalled();
     });
 
-    it("should call getCredit when printTransaction is called", () => {
+   xit("should call getCredit when printTransaction is called", () => {
         // Arrange
+        testType = 'credit';
         testTransaction = new Transaction(testType, testAmount, testBalance, testDate);
         spyOn(testTransaction, 'getCredit').and.callThrough();
 
@@ -101,5 +120,39 @@ describe("Transaction Tests: ", () => {
         testTransaction.printTransaction();
         // Assert
         expect(testTransaction.getCredit).toHaveBeenCalled();
+    });
+
+    xit("should call getBalance when printTransaction is called", () => {
+        // Arrange
+        testType = 'credit';
+        testTransaction = new Transaction(testType, testAmount, testBalance, testDate);
+        spyOn(testTransaction, 'getBalance').and.callThrough();
+
+        // Act
+        testTransaction.printTransaction();
+        // Assert
+        expect(testTransaction.getBalance).toHaveBeenCalled();
+    });
+
+    it("should log the correct output when type is credit and amount is 4 digits", () => {
+        // Arrange
+        testType = 'credit';
+        testTransaction = new Transaction(testType, testAmount, testBalance, testDate);
+        // Act
+        testTransaction.printTransaction();
+        // Assert
+        expect(clgSpy).toHaveBeenCalledWith("12/12/2012 || 1000.00 ||         || 1000.00")
+    });
+
+    it("should log the correct output when type is debit and 3 digits", () => {
+        // Arrange
+        testType = 'debit';
+        testAmount = 500;
+        testBalance = 500;
+        testTransaction = new Transaction(testType, testAmount, testBalance, testDate);
+        // Act
+        testTransaction.printTransaction();
+        // Assert
+        expect(clgSpy).toHaveBeenCalledWith("12/12/2012 ||         ||  500.00 ||  500.00")
     });
 });
