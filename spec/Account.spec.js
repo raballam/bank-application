@@ -33,7 +33,7 @@ describe("Account Initialisation Tests: ", () => {
         testName = null;
         // Act
         // Assert
-        expect(() => new Account(testName)).toThrowError("Name cannot be null")
+        expect(() => new Account(testName)).toThrowError("Name cannot be null");
     });
     
     it("should have an initial balance of 0", () => {
@@ -114,7 +114,7 @@ describe("Account Deposit/Withdraw Tests: ", () => {
         testWithdrawal = 20;
         // Act
         // Assert
-        expect(() => testAccount.withdraw(testWithdrawal)).toThrowError("Insufficient funds.")
+        expect(() => testAccount.withdraw(testWithdrawal)).toThrowError("Insufficient funds.");
     });
 
     it("should allow full balance to be withdrawn", () => {
@@ -276,7 +276,7 @@ describe("Account Printer Tests: ", () => {
     function stripColours(text) {
         const colorRegex = /\x1B\[[0-9;]*[JKmsu]/g;
         return text.replace(colorRegex, '');
-    }
+    };
 
     it("should have a printer that calls getName()", () => {
         // Arrange
@@ -285,7 +285,7 @@ describe("Account Printer Tests: ", () => {
         testAccount.printAccountDetails();
         // Assert
         expect(testAccount.getName).toHaveBeenCalled();
-    })
+    });
 
     it("should have a printer that calls getAccountNumber()", () => {
         // Arrange
@@ -294,7 +294,7 @@ describe("Account Printer Tests: ", () => {
         testAccount.printAccountDetails();
         // Assert
         expect(testAccount.getAccountNumber).toHaveBeenCalled();
-    })
+    });
 
     it("should have a printer that calls getOverdraftDetails", () => {
         // Arrange
@@ -303,7 +303,7 @@ describe("Account Printer Tests: ", () => {
         testAccount.printAccountDetails();
         // Assert
         expect(testAccount.getOverdraftDetails).toHaveBeenCalled();
-    })
+    });
 
     it("should have a printer that calls currentAvailable", () => {
         // Arrange
@@ -312,7 +312,7 @@ describe("Account Printer Tests: ", () => {
         testAccount.printAccountDetails();
         // Assert
         expect(testAccount.currentAvailable).toHaveBeenCalled();
-    })
+    });
 
     it("should properly format printAccountDetails", () => {
         // Arrange
@@ -329,7 +329,7 @@ describe("Account Printer Tests: ", () => {
         expect(stripColours(actual)).toEqual(`            Account Name:         Test Name
           Account Number:          ${accountNumber}
          Overdraft Limit:          £1000.00
-       Available Balance:          £1500.00`)
-    })
+       Available Balance:          £1500.00`);
+    });
 });
 

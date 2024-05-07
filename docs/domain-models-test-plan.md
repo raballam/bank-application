@@ -67,6 +67,12 @@ Domain models were built from the user stories:
 
 !['Domain models'](img/domain-models.jpeg);
 
+## GAI
+
+ChatGPT was used to generate some edge cases for overdrafts:
+
+!['chatGPT'](img/chat-gpt.jpeg);
+
 ## Test Plan
 
 Account Tests:
@@ -102,14 +108,22 @@ Transaction Tests:
 1. Verify that the getAmount method returns the correct amount of the transaction.
 2. Verify that the getBalance method returns the correct total balance after the transaction.
 3. Verify that the getDate method returns the correct date of the transaction.
-4. Verify that the getDebit method correctly returns the amount if the transaction type is debit.
-5. Verify that the getCredit method correctly returns the amount if the transaction type is credit.
-6. Verify that the printTransaction method calls the getDate method.
-7. Verify that the printTransaction method calls the getDebit method.
-8. Verify that the printTransaction method calls the getCredit method.
-9. Verify that the printTransaction method calls the getBalance method.
-10. Verify that the correct output is logged when the transaction type is credit and the amount has four digits.
-11. Verify that the correct output is logged when the transaction type is debit and the amount has three digits.
+4. Verify that the printTransaction method calls the getDate method.
+5. Verify that the printTransaction method calls the getDebit method.
+6. Verify that the printTransaction method calls the getCredit method.
+7. Verify that the printTransaction method calls the getBalance method.
+
+Credit Transaction Tests:
+
+1. Verify that it inherits properties and methods from Transaction class
+2. Verify that it sets credit to amount
+3. Verify that it logs correct output when printTransaction is called
+
+Debit Transaction Tests:
+
+1. Verify that it inherits properties and methods from Transaction class
+2. Verify that it sets debit to amount
+3. Verify that it logs correct output when printTransaction is called
 
 Printer Tests:
 

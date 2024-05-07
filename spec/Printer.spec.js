@@ -10,15 +10,15 @@ describe("Printer Account and Statement Tests: ", () => {
             deposit: jasmine.createSpy('deposit'),
         };
         clgSpy = spyOn(console, 'log');
-    })
+    });
 
     it("should print a header", () => {
         // Arrange
         // Act
         Printer.printStatement(testAccount);
         // Assert
-        expect(clgSpy).toHaveBeenCalledWith("date       || credit  || debit   || balance")
-    })
+        expect(clgSpy).toHaveBeenCalledWith("date       || credit  || debit   || balance");
+    });
 
     it("should call transaction.printTransaction once if one transaction in array", () => {
         // Arrange
@@ -30,7 +30,7 @@ describe("Printer Account and Statement Tests: ", () => {
         Printer.printStatement(testAccount);
         // Assert
         expect(testTransaction.printTransaction).toHaveBeenCalledTimes(1);
-    })
+    });
 
     it("should call transaction.printTransactions 2 times if 2 transactions in array", () => {
         // Arrange
@@ -43,7 +43,7 @@ describe("Printer Account and Statement Tests: ", () => {
         Printer.printStatement(testAccount);
         // Assert
         expect(testTransaction.printTransaction).toHaveBeenCalledTimes(2);
-    })
+    });
 
     it("should format transactions correctly", () => {
         // Arrange
@@ -55,7 +55,7 @@ describe("Printer Account and Statement Tests: ", () => {
             printTransaction: function () {
                 console.log(`${this.date.padEnd(10)} || ${this.credit ? this.credit.toFixed(2).padStart(7) : ''.padEnd(7)} || ${this.debit ? this.debit().toFixed(2).padStart(7) : ''.padEnd(7)} || ${this.balance.toFixed(2).padStart(7)}`);
             }
-        }
+        };
         testAccount.transactions.unshift(testTransaction);
         const testTransaction2 = {
             date: "13/12/2024",
@@ -65,7 +65,7 @@ describe("Printer Account and Statement Tests: ", () => {
             printTransaction: function () {
                 console.log(`${this.date.padEnd(10)} || ${this.credit ? this.credit().toFixed(2).padStart(7) : ''.padEnd(7)} || ${this.debit ? this.debit.toFixed(2).padStart(7) : ''.padEnd(7)} || ${this.balance.toFixed(2).padStart(7)}`);
             }
-        }
+        };
         testAccount.transactions.unshift(testTransaction2);
         // Act
         Printer.printStatement(testAccount);
@@ -73,7 +73,7 @@ describe("Printer Account and Statement Tests: ", () => {
         expect(clgSpy).toHaveBeenCalledWith("date       || credit  || debit   || balance");
         expect(clgSpy).toHaveBeenCalledWith("13/12/2024 ||         ||  500.00 || 1500.00");
         expect(clgSpy).toHaveBeenCalledWith("12/12/2024 || 2000.00 ||         || 2000.00");
-    })
+    });
 
     it("should call account.printAccountDetails once", () => {
         // Arrange
@@ -81,7 +81,7 @@ describe("Printer Account and Statement Tests: ", () => {
         Printer.printAccount(testAccount);
         // Assert
         expect(testAccount.printAccountDetails).toHaveBeenCalledTimes(1);
-    })
+    });
 });
 describe("Printer Withdraw and Deposit Tests: ", () => {
     let testAccount, clgSpy, clgErrSpy;
@@ -94,7 +94,7 @@ describe("Printer Withdraw and Deposit Tests: ", () => {
         };
         clgSpy = spyOn(console, 'log');
         clgErrSpy = spyOn(console, 'error');
-    })
+    });
 
     it("should print a success message if withdrawal successful", () => {
         // Arrange
@@ -107,7 +107,7 @@ describe("Printer Withdraw and Deposit Tests: ", () => {
         // Assert
         expect(clgSpy).toHaveBeenCalledWith(`Withdrawal successful!
         £500.00 has been withdrawn from your account.`);
-    })
+    });
 
     it("should print an error message if withdrawal unsuccessful", () => {
         // Arrange
@@ -118,7 +118,7 @@ describe("Printer Withdraw and Deposit Tests: ", () => {
         Printer.printWithdrawal(testAmount, testDate, testAccount);
         // Assert
         expect(clgErrSpy).toHaveBeenCalledWith("Insufficient funds.");
-    })
+    });
 
     it("should print a success message if deposit is successful", () => {
         // Arrange
@@ -130,7 +130,7 @@ describe("Printer Withdraw and Deposit Tests: ", () => {
         // Assert
         expect(clgSpy).toHaveBeenCalledWith(`Deposit successful!
         £600.00 has been added to your account.`)
-    })
+    });
 
     it("should print an error message if deposit unsuccessful", () => {
         // Arrange
@@ -141,6 +141,6 @@ describe("Printer Withdraw and Deposit Tests: ", () => {
         Printer.printDeposit(testAmount, testDate, testAccount);
         // Assert
         expect(clgErrSpy).toHaveBeenCalledWith("Unsuccessful. Please try again.")
-    })
+    });
     
 });
