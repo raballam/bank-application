@@ -12,8 +12,8 @@ export default class Transaction {
     #amount;
     #balance;
     #date;
-    // #debit;
-    // #credit;
+    #debit;
+    #credit;
 
     // getType() {
     //     return this.#type;
@@ -27,12 +27,12 @@ export default class Transaction {
     getDate() {
         return this.#date;
     }
-    // getDebit() {
-    //     return this.#debit;
-    // }
-    // getCredit() {
-    //     return this.#credit;
-    // }
+    getDebit() {
+        return this.#debit;
+    }
+    getCredit() {
+        return this.#credit;
+    }
     printTransaction = () => {
         console.log(`${this.getDate().padEnd(10)} || ${this.getCredit() ? chalk.green(this.getCredit().toFixed(2).padStart(7)) : ''.padEnd(7)} || ${this.getDebit() ? chalk.red(this.getDebit().toFixed(2).padStart(7)) : ''.padEnd(7)} || ${this.getBalance() < 0 ? chalk.red(this.getBalance().toFixed(2).padStart(7)) : chalk.green(this.getBalance().toFixed(2).padStart(7))}`);
     };

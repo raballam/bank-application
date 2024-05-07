@@ -1,12 +1,12 @@
-import DebitTransaction from "../src/DebitTransaction.js";
+import CreditTransaction from "../src/CreditTransaction.js";
 
-describe("Debit Transaction Tests", () => {
-    let testAmount, testBalance, testDate, debitTransaction, clgSpy, actual;
+describe("Credit Transaction Tests", () => {
+    let testAmount, testBalance, testDate, creditTransaction, clgSpy, actual;
     beforeEach(() => {
         testAmount = 50,
         testBalance = 100,
         testDate = '12/12/2012',
-            debitTransaction = new DebitTransaction(testAmount, testBalance, testDate);
+        creditTransaction = new CreditTransaction(testAmount, testBalance, testDate);
         clgSpy = spyOn(console, 'log')
     })
 
@@ -20,24 +20,24 @@ describe("Debit Transaction Tests", () => {
         // Arrange
         // Act
         // Assert
-        expect(debitTransaction.getAmount()).toBe(testAmount);
-        expect(debitTransaction.getBalance()).toBe(testBalance);
-        expect(debitTransaction.getDate()).toBe(testDate);
+        expect(creditTransaction.getAmount()).toBe(testAmount);
+        expect(creditTransaction.getBalance()).toBe(testBalance);
+        expect(creditTransaction.getDate()).toBe(testDate);
     });
 
     it("should set property debit to amount", () => {
         // Arrange
         // Act
         // Assert
-        expect(debitTransaction.getDebit()).toBe(testAmount);
+        expect(creditTransaction.getCredit()).toBe(testAmount);
     });
 
     it("should log correct output when printTransaction is called", () => {
         // Arrange
           // Act
-        debitTransaction.printTransaction();
+        creditTransaction.printTransaction();
         // Assert
         actual = clgSpy.calls.argsFor(0)[0];  // Gets the actual logged input
-        expect(stripColours(actual)).toEqual("12/12/2012 ||         ||   50.00 ||  100.00")
+        expect(stripColours(actual)).toEqual("12/12/2012 ||   50.00 ||         ||  100.00")
     })
 })

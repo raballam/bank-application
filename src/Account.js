@@ -1,4 +1,5 @@
-import Transaction from "./Transaction.js";
+import CreditTransaction from "./CreditTransaction.js";
+import DebitTransaction from "./DebitTransaction.js";
 export default class Account {
     static accountNumberGen = 12348765;
     constructor(name) {
@@ -33,7 +34,7 @@ export default class Account {
     deposit(funds, date) {
         if (funds < 0) throw new Error("Cannot deposit negative funds.");
         this.#balance += funds;
-        this.transactions.unshift(new Transaction('credit', funds, this.#balance, date));
+        this.transactions.unshift(new CreditTransaction(funds, this.#balance, date));
     };
 
     withdraw(funds, date) {
@@ -42,7 +43,7 @@ export default class Account {
             throw new Error("Insufficient funds.")
         } else {
             this.#balance -= funds;
-            this.transactions.unshift(new Transaction('debit', funds, this.#balance, date));
+            this.transactions.unshift(new DebitTransaction(funds, this.#balance, date));
         }
     };
 
