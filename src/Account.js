@@ -1,5 +1,6 @@
 import CreditTransaction from "./CreditTransaction.js";
 import DebitTransaction from "./DebitTransaction.js";
+import chalk from 'chalk';
 export default class Account {
     static accountNumberGen = 12348765;
     constructor(name) {

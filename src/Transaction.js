@@ -38,6 +38,6 @@ export default class Transaction {
         let credit = this.getCredit() ? this.getCredit().toFixed(2) : '';
         let debit = this.getDebit() ? this.getDebit().toFixed(2) : '';
         let balance = this.getBalance().toFixed(2);
-        console.log(`${date.padEnd(10)} || ${chalk.green(credit.padEnd(7))} || ${chalk.red(debit.padStart(7))} || ${balance < 0 ? chalk.red(balance.padStart(7)) : chalk.green(balance.padStart(7))}`);
+        console.log(`${date.padEnd(10)} || ${chalk.green(credit.padStart(7))} || ${chalk.red(debit.padStart(7))} || ${balance < 0 ? chalk.red(balance.padStart(7)) : chalk.green(balance.padStart(7))}`);
     };
 };

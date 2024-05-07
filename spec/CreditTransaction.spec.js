@@ -4,17 +4,17 @@ describe("Credit Transaction Tests", () => {
     let testAmount, testBalance, testDate, creditTransaction, clgSpy, actual;
     beforeEach(() => {
         testAmount = 50,
-        testBalance = 100,
-        testDate = '12/12/2012',
-        creditTransaction = new CreditTransaction(testAmount, testBalance, testDate);
+            testBalance = 100,
+            testDate = '12/12/2012',
+            creditTransaction = new CreditTransaction(testAmount, testBalance, testDate);
         clgSpy = spyOn(console, 'log')
-    })
+    });
 
     // Strips colours to easier match outputs (found regex using chatGPT)
     function stripColours(text) {
         const colorRegex = /\x1B\[[0-9;]*[JKmsu]/g;
         return text.replace(colorRegex, '');
-    }
+    };
 
     it("should inherit properties and methods from the base Transaction class", () => {
         // Arrange

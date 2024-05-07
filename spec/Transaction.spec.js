@@ -7,6 +7,7 @@ describe("Transaction Tests: ", () => {
         testDate = "12/12/2012";
         testAmount = 1000;
         testBalance = 1000;
+        clgSpy = spyOn(console, 'log');
     })
 
     afterEach(() => {
