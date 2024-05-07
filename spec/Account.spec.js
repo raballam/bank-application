@@ -258,9 +258,9 @@ describe("Account Tests: ", () => {
         // Act
         testAccount.printAccountDetails();
         // Assert
-        expect(clgSpy).toHaveBeenCalledWith(`Account Name:      Test Name
-Account Number:    ${accountNumber}
-Overdraft Limit:   £1000.00
-Available Balance: £1500.00`)
+        expect(clgSpy).toHaveBeenCalledWith(`            Account Name:         Test Name
+          Account Number:          ${accountNumber}
+         Overdraft Limit:          £1000.00
+       Available Balance:          £1500.00`)
     })
 });

@@ -23,7 +23,7 @@ export default class Account {
     };
 
     getAccountNumber() {
-        return this.#accountNumber;
+        return String(this.#accountNumber);
     };
 
     getBalance() {
@@ -64,14 +64,14 @@ export default class Account {
     };
 
     currentAvailable() {
-        return this.overdraftEnabled ? this.getBalance() + this.overdraftLimit : this.getBalance();
+        return `£${this.overdraftEnabled ? (this.getBalance() + this.overdraftLimit).toFixed(2) : this.getBalance().toFixed(2)}`;
     };
 
     printAccountDetails() {
-        console.log(`${"Account Name:".padEnd(18)} ${this.getName()}
-${"Account Number:".padEnd(18)} ${this.getAccountNumber()}
-${"Overdraft Limit:".padEnd(18)} ${this.getOverdraftDetails()}
-${"Available Balance:".padEnd(18)} £${this.currentAvailable().toFixed(2)}`);
+        console.log(`${"Account Name:".padStart(25)} ${this.getName().padStart(17)}
+${"Account Number:".padStart(25)} ${this.getAccountNumber().padStart(17)}
+${"Overdraft Limit:".padStart(25)} ${this.getOverdraftDetails().padStart(17)}
+${"Available Balance:".padStart(25)} ${(this.currentAvailable().padStart(17))}`);
     };
 
  };
