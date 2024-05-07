@@ -3,10 +3,10 @@ import CreditTransaction from "../src/CreditTransaction.js";
 describe("Credit Transaction Tests", () => {
     let testAmount, testBalance, testDate, creditTransaction, clgSpy, actual;
     beforeEach(() => {
-        testAmount = 50,
-            testBalance = 100,
-            testDate = '12/12/2012',
-            creditTransaction = new CreditTransaction(testAmount, testBalance, testDate);
+        testAmount = 50;
+        testBalance = 100;
+        testDate = '12/12/2012';
+        creditTransaction = new CreditTransaction(testAmount, testBalance, testDate);
         clgSpy = spyOn(console, 'log');
     });
 
