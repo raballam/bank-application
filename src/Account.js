@@ -60,7 +60,7 @@ export default class Account {
 
     getOverdraftDetails() {
         if (!this.overdraftEnabled) return "N/A";
-        return this.overdraftLimit;
+        return `£${this.overdraftLimit.toFixed(2)}`;
     };
 
     currentAvailable() {
@@ -68,10 +68,10 @@ export default class Account {
     };
 
     printAccountDetails() {
-        console.log(`Account Name: ${this.getName()}
-        Account Number: ${this.getAccountNumber()}
-        Overdraft Limit: £${this.getOverdraftDetails()}
-        Available Balance: £${this.currentAvailable()}`);
+        console.log(`${"Account Name:".padEnd(18)} ${this.getName()}
+${"Account Number:".padEnd(18)} ${this.getAccountNumber()}
+${"Overdraft Limit:".padEnd(18)} ${this.getOverdraftDetails()}
+${"Available Balance:".padEnd(18)} £${this.currentAvailable().toFixed(2)}`);
     };
 
  };

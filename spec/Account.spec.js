@@ -2,11 +2,13 @@ import Account from "../src/Account.js";
 import Transaction from "../src/Transaction.js";
 
 describe("Account Tests: ", () => {
-    let testAccount, testName, testDeposit1, testDeposit2, testWithdrawal, testBalance, testDate, initial, testLimit;
+    let testAccount, testName, testDeposit1, testDeposit2, testWithdrawal, testBalance, testDate;
+    let initial, testLimit, clgSpy, accountNumber;
 
     beforeEach(() => {
         testName = "Test Name";
         testAccount = new Account(testName);
+        clgSpy = spyOn(console, 'log');
     });
 
     afterEach(() => {
@@ -243,5 +245,22 @@ describe("Account Tests: ", () => {
         testAccount.printAccountDetails();
         // Assert
         expect(testAccount.currentAvailable).toHaveBeenCalled();
+    })
+
+    it("should properly format printAccountDetails", () => {
+        // Arrange
+        testLimit = 1000;
+        testDeposit1 = 500;
+        testAccount.enableOverdraft();
+        testAccount.setOverdraft(testLimit);
+        testAccount.deposit(testDeposit1);
+        accountNumber = testAccount.getAccountNumber();
+        // Act
+        testAccount.printAccountDetails();
+        // Assert
+        expect(clgSpy).toHaveBeenCalledWith(`Account Name:      Test Name
+Account Number:    ${accountNumber}
+Overdraft Limit:   £1000.00
+Available Balance: £1500.00`)
     })
 });

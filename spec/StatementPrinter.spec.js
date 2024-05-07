@@ -7,7 +7,8 @@ describe("Statement Printer Tests: ", () => {
             transactions: [
                 // new Transaction('debit', 500, 1500, '13/12/2024'),
                 // new Transaction('credit', 2000, 2000, '12/12/2024')
-            ]
+            ],
+            printAccountDetails: jasmine.createSpy('printAccountDetails')
         };
         clgSpy = spyOn(console, 'log');
     })
@@ -74,4 +75,13 @@ describe("Statement Printer Tests: ", () => {
         expect(clgSpy).toHaveBeenCalledWith("13/12/2024 ||         ||  500.00 || 1500.00");
         expect(clgSpy).toHaveBeenCalledWith("12/12/2024 || 2000.00 ||         || 2000.00");
     })
+
+    it("should call account.printAccountDetails once", () => {
+        // Arrange
+        // Act
+        StatementPrinter.printStatement(testAccount);
+        // Assert
+        expect(testAccount.printAccountDetails).toHaveBeenCalledTimes(1);
+    })
+    
 })
