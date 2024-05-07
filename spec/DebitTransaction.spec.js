@@ -6,7 +6,7 @@ describe("Debit Transaction Tests", () => {
         testAmount = 50,
         testBalance = 100,
         testDate = '12/12/2012',
-            debitTransaction = new DebitTransaction(testAmount, testBalance, testDate);
+        debitTransaction = new DebitTransaction(testAmount, testBalance, testDate);
         clgSpy = spyOn(console, 'log')
     })
 
