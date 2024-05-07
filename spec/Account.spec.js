@@ -74,7 +74,7 @@ describe("Account Tests: ", () => {
         testDeposit1 = -50;
         // Act
         // Assert
-        expect(() => testAccount.deposit(testDeposit1)).toThrowError("Cannot deposit negative funds");
+        expect(() => testAccount.deposit(testDeposit1)).toThrowError("Cannot deposit negative funds.");
     });
 
     it("should decrease the balance when funds are withdrawn", () => {
@@ -93,7 +93,7 @@ describe("Account Tests: ", () => {
         testWithdrawal = -10;
         // Act
         // Assert
-        expect(() => testAccount.withdraw(testWithdrawal)).toThrowError("Cannot withdraw negative funds");
+        expect(() => testAccount.withdraw(testWithdrawal)).toThrowError("Cannot withdraw negative funds.");
     });
     
     it("should throw an error if attempts to withdraw more than balance", () => {
@@ -103,7 +103,7 @@ describe("Account Tests: ", () => {
         testWithdrawal = 20;
         // Act
         // Assert
-        expect(() => testAccount.withdraw(testWithdrawal)).toThrowError("Insufficient funds")
+        expect(() => testAccount.withdraw(testWithdrawal)).toThrowError("Insufficient funds.")
     });
 
     it("should allow full balance to be withdrawn", () => {
@@ -181,7 +181,7 @@ describe("Account Tests: ", () => {
         testWithdrawal = 1000;
         // Act
         // Assert
-        expect(() => testAccount.withdraw(testWithdrawal)).not.toThrowError("Insufficient funds");
+        expect(() => testAccount.withdraw(testWithdrawal)).not.toThrowError("Insufficient funds.");
     });
 
     it("should throw an error if overdraftEnabled is true but withdrawal is greater than balance + overdraftLimit", () => {
@@ -194,7 +194,7 @@ describe("Account Tests: ", () => {
         testWithdrawal = 2000;
         // Act
         // Assert
-        expect(() => testAccount.withdraw(testWithdrawal)).toThrowError("Insufficient funds")
+        expect(() => testAccount.withdraw(testWithdrawal)).toThrowError("Insufficient funds.")
     });
 
     it("should allow withdrawal that takes account to overdraft limit", () => {
