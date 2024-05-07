@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import Transaction from "./Transaction.js";
 export default class Account {
     static accountNumberGen = 12348765;
@@ -68,10 +69,10 @@ export default class Account {
     };
 
     printAccountDetails() {
-        console.log(`${"Account Name:".padStart(25)} ${this.getName().padStart(17)}
-${"Account Number:".padStart(25)} ${this.getAccountNumber().padStart(17)}
-${"Overdraft Limit:".padStart(25)} ${this.getOverdraftDetails().padStart(17)}
-${"Available Balance:".padStart(25)} ${(this.currentAvailable().padStart(17))}`);
+        console.log(`${"Account Name:".padStart(25)} ${chalk.bold.blue(this.getName().padStart(17))}
+${"Account Number:".padStart(25)} ${chalk.bold.blue(this.getAccountNumber().padStart(17))}
+${"Overdraft Limit:".padStart(25)} ${chalk.bold.blue(this.getOverdraftDetails().padStart(17))}
+${"Available Balance:".padStart(25)} ${chalk.bold.blue(this.currentAvailable().padStart(17))}`);
     };
 
  };

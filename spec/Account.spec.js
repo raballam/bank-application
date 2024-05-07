@@ -1,22 +1,16 @@
 import Account from "../src/Account.js";
 import Transaction from "../src/Transaction.js";
 
-describe("Account Tests: ", () => {
-    let testAccount, testName, testDeposit1, testDeposit2, testWithdrawal, testBalance, testDate;
-    let initial, testLimit, clgSpy, accountNumber;
+describe("Account Initialisation Tests: ", () => {
+    let testAccount, testName;
 
     beforeEach(() => {
         testName = "Test Name";
         testAccount = new Account(testName);
-        clgSpy = spyOn(console, 'log');
     });
 
     afterEach(() => {
-        testDeposit1 = 0;
-        testDeposit2 = 0;
-        testWithdrawal = 0;
-        testBalance = 0;
-        testDate = "12/12/2024";
+        testAccount = undefined;
     });
 
     it("should be instance of Account", () => {
@@ -47,6 +41,23 @@ describe("Account Tests: ", () => {
         // Act
         // Assert
         expect(testAccount.getBalance()).toBe(0);
+    });
+});
+
+describe("Account Deposit/Withdraw Tests: ", () => {
+    let testAccount, testName, testDeposit1, testDeposit2, testWithdrawal, testBalance;
+
+    beforeEach(() => {
+        testName = "Test Name";
+        testAccount = new Account(testName);
+    });
+
+    afterEach(() => {
+        testDeposit1 = 0;
+        testDeposit2 = 0;
+        testWithdrawal = 0;
+        testBalance = 0;
+        testAccount = undefined;
     });
 
     it("should increase balance when funds are deposited when balance is 0", () => {
@@ -116,6 +127,22 @@ describe("Account Tests: ", () => {
         // Assert
         expect(testAccount.getBalance()).toBe(0);
     });
+});
+
+describe("Account Transaction Tests: ", () => {
+    let testAccount, testName, testDeposit1, testWithdrawal, testDate, initial;
+
+    beforeEach(() => {
+        testName = "Test Name";
+        testAccount = new Account(testName);
+    });
+
+    afterEach(() => {
+        testDeposit1 = 0;
+        testWithdrawal = 0;
+        testDate = "12/12/2024";
+        initial = undefined;
+    });
 
     it("should add a transaction to the transactions array when a deposit is made", () => {
         // Arrange
@@ -145,6 +172,26 @@ describe("Account Tests: ", () => {
             expect(transaction).toBeInstanceOf(Transaction);
         }
     });
+});
+
+describe("Account Overdraft Tests: ", () => {
+    let testAccount, testName, testDeposit1, testWithdrawal, testLimit;
+
+    beforeEach(() => {
+        testName = "Test Name";
+        testAccount = new Account(testName);
+    });
+
+    afterEach(() => {
+        testDeposit1 = 0;
+        testWithdrawal = 0;
+    });
+
+    // Strips colours to easier match outputs (found regex using chatGPT)
+    function stripColours(text) {
+        const colorRegex = /\x1B\[[0-9;]*[JKmsu]/g;
+        return text.replace(colorRegex, '');
+    }
 
     it("should toggle overdraft on with enableOverdraft", () => {
         // Arrange
@@ -210,6 +257,26 @@ describe("Account Tests: ", () => {
         // Assert
         expect(testAccount.getBalance()).toBe(-500);
     });
+});
+
+describe("Account Printer Tests: ", () => {
+    let testAccount, testName, testDeposit1, testLimit, clgSpy, accountNumber, actual;
+
+    beforeEach(() => {
+        testName = "Test Name";
+        testAccount = new Account(testName);
+        clgSpy = spyOn(console, 'log');
+    });
+
+    afterEach(() => {
+        testDeposit1 = 0;
+    });
+
+    // Strips colours to easier match outputs (found regex using chatGPT)
+    function stripColours(text) {
+        const colorRegex = /\x1B\[[0-9;]*[JKmsu]/g;
+        return text.replace(colorRegex, '');
+    }
 
     it("should have a printer that calls getName()", () => {
         // Arrange
@@ -258,9 +325,11 @@ describe("Account Tests: ", () => {
         // Act
         testAccount.printAccountDetails();
         // Assert
-        expect(clgSpy).toHaveBeenCalledWith(`            Account Name:         Test Name
+        actual = clgSpy.calls.argsFor(0)[0];  // Gets the actual logged input
+        expect(stripColours(actual)).toEqual(`            Account Name:         Test Name
           Account Number:          ${accountNumber}
          Overdraft Limit:          £1000.00
        Available Balance:          £1500.00`)
     })
 });
+

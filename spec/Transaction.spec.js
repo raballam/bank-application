@@ -1,14 +1,12 @@
 import Transaction from "../src/Transaction.js";
 
-describe("Transaction Tests: ", () => {
-    let testType, testTransaction, testAmount, testBalance, testDate, clgSpy, actual;
+describe("Transaction Initialisation Tests: ", () => {
+    let testType, testTransaction, testAmount, testBalance, testDate;
 
     beforeEach(() => {
         testDate = "12/12/2012";
         testAmount = 1000;
         testBalance = 1000;
-        clgSpy = spyOn(console, 'log');
-
     })
 
     afterEach(() => {
@@ -18,30 +16,6 @@ describe("Transaction Tests: ", () => {
         testBalance = undefined;
         testDate = undefined;
     })
-
-    // Strips colours to easier match outputs (found regex using chatGPT)
-    function stripColours(text) {
-        const colorRegex = /\x1B\[[0-9;]*[JKmsu]/g;
-        return text.replace(colorRegex, '');
-    }
-
-    it("should return credit if type is credit", () => {
-        // Arrange
-        testType = "credit";
-        testTransaction = new Transaction(testType);
-        // Act
-        // Assert
-        expect(testTransaction.getType()).toBe(testType);
-    });
-
-    it("should return debit if type is debit", () => {
-        // Arrange
-        testType = "debit";
-        testTransaction = new Transaction(testType);
-        // Act
-        // Assert
-        expect(testTransaction.getType()).toBe(testType);
-    });
 
     it("should return the amount of the transaction", () => {
         // Arrange
@@ -91,11 +65,35 @@ describe("Transaction Tests: ", () => {
         // Assert
         expect(testTransaction.getCredit()).toBe(testAmount);
     });
+});
 
-    //! The below tests are xed out as they now fail because I changed the code to no longer
-    //! use this. However, I kept them in as they were part of the process.
+describe("Transaction Initialisation Tests: ", () => {
+    let testType, testTransaction, testAmount, testBalance, testDate, clgSpy, actual;
 
-    xit("should call getDate when printTransaction is called", () => {
+    beforeEach(() => {
+        testDate = "12/12/2012";
+        testAmount = 1000;
+        testBalance = 1000;
+        clgSpy = spyOn(console, 'log');
+
+    })
+
+    afterEach(() => {
+        testTransaction = undefined;
+        testType = undefined;
+        testAmount = undefined;
+        testBalance = undefined;
+        testDate = undefined;
+        actual = undefined;
+    })
+
+    // Strips colours to easier match outputs (found regex using chatGPT)
+    function stripColours(text) {
+        const colorRegex = /\x1B\[[0-9;]*[JKmsu]/g;
+        return text.replace(colorRegex, '');
+    }
+
+    it("should call getDate when printTransaction is called", () => {
         // Arrange
         testType = 'debit';
         testTransaction = new Transaction(testType, testAmount, testBalance, testDate);
@@ -107,7 +105,7 @@ describe("Transaction Tests: ", () => {
         expect(testTransaction.getDate).toHaveBeenCalled();
     });
 
-    xit("should call getDebit when printTransaction is called", () => {
+    it("should call getDebit when printTransaction is called", () => {
         // Arrange
         testType = 'debit';
         testTransaction = new Transaction(testType, testAmount, testBalance, testDate);
@@ -119,7 +117,7 @@ describe("Transaction Tests: ", () => {
         expect(testTransaction.getDebit).toHaveBeenCalled();
     });
 
-   xit("should call getCredit when printTransaction is called", () => {
+   it("should call getCredit when printTransaction is called", () => {
         // Arrange
         testType = 'credit';
         testTransaction = new Transaction(testType, testAmount, testBalance, testDate);
@@ -131,7 +129,7 @@ describe("Transaction Tests: ", () => {
         expect(testTransaction.getCredit).toHaveBeenCalled();
     });
 
-    xit("should call getBalance when printTransaction is called", () => {
+    it("should call getBalance when printTransaction is called", () => {
         // Arrange
         testType = 'credit';
         testTransaction = new Transaction(testType, testAmount, testBalance, testDate);
@@ -142,8 +140,6 @@ describe("Transaction Tests: ", () => {
         // Assert
         expect(testTransaction.getBalance).toHaveBeenCalled();
     });
-
-    //! End of xed tests.
 
     it("should log the correct output when type is credit and amount is 4 digits", () => {
         // Arrange

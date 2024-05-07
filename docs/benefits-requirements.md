@@ -1,14 +1,32 @@
-The Business Analyst team working with the client has identified the following features that should be implemented:
+# Console Banking Application
 
-- A user should should see the output of the application on the terminal:
-  - Access an account (assuming each user will automatically have their details loaded into the program on startup)
-  - Deposit funds
-  - Withdraw funds - if they have sufficient balance to do so
-  - Print an account statement (date, amount, balance)
-  
-  - The output of the statement should be formatted so credits and positive balances appear in green text, debits and negative balances appear in red text
-- An overdraft facility can be added to the account, so that if a withdrawal is attempted which would result in a negative balance, the withdrawal is allowed up to the value of the overdraft only
-  - This overdraft should be configurable on a per-account basis (i.e. the amount of the overdraft is not fixed across all clients) and only implemented if the account has an overdraft facility enabled
+The primary aim of this  banking application is to provide users with a convenient and efficient way to manage their finances, directly from their terminal. By offering a range of features, the application aims to streamline banking operations and enhance the overall user experience.
+
+## Benefits
+
+This software allows users to easily withdraw and deposit funds and access information about their account. It has the following features:
+
+- **Access Account**
+Users see their account information upon startup, so can easily find information such as their account number and available balance. This allows the user to efficiently monitor their spending and manage their budget.
+- **Deposit Funds**
+The application allows users to deposit funds into their account. By entering the desired amount, users can quickly and securely add money to their balance, ensuring their funds are readily available whenever needed.
+- **Withdraw Funds** Users can withdraw funds from their account, provided they have a sufficient balance. This allows users to spend their money as they choose, without having to visit a bank or wait for the request to be processed.
+- **Print Account Statement**
+The application generates and prints an account statement for users, displaying essential details such as transaction date, amount, and current balance. To enhance readability and user experience, the statement's output is formatted to display credits and positive balances in green text, while debits and negative balances appear in red text.
+- **Overdraft Facility**
+Users have the option to enable an overdraft facility for their account, allowing them to withdraw funds beyond their available balance up to the configured overdraft limit. This feature provides users with added flexibility and financial security, ensuring they can access additional funds when needed.
+
+By incorporating these features, this banking application empowers users with greater control over their finances while prioritizing convenience, security, and flexibility. Whether managing daily expenses or planning for future financial goals, users can rely on the application to deliver a seamless banking experience tailored to their needs.
+
+## Risks
+- **User Error in Configuration**
+Since users have the ability to configure overdraft limits and other account settings, there is a risk of human error leading to incorrect configuration. This could result in unintended consequences such as overdraft misuse or incorrect balance reporting. Implementing safeguards and validation checks can help mitigate this risk.
+- **Limited Override Options**
+The application lacks a mechanism for personnel to override the system's decision regarding transaction approvals or denials before they are executed. In scenarios where exceptions need to be made based on unique circumstances, this could lead to delays or inconvenience for users. Incorporating a manual override feature could enhance flexibility and adaptability.
+- **Insufficient Data Collection**
+The application's data collection is limited to basic account information and transaction history. This is not sufficient data to offer personalized services and tailored financial solutions and enhancing data collection capabilities could enable the bank to better understand customer needs and improve service delivery. It may be useful to include information such as the types of purchases, repeat payments and user demographics in order to analyse user spending behaviour.
+- **Inadequate Risk Assessment**
+The application currently does not consider factors beyond basic account management, such as transaction patterns, suspicious activity detection, or fraud prevention measures. Failure to assess and mitigate risks related to fraudulent activities or security breaches could expose the bank and its customers to financial losses and reputational damage. 
 
 ## User Stories
 
