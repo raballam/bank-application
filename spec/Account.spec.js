@@ -217,4 +217,31 @@ describe("Account Tests: ", () => {
         // Assert
         expect(testAccount.getName).toHaveBeenCalled();
     })
+
+    it("should have a printer that calls getAccountNumber()", () => {
+        // Arrange
+        spyOn(testAccount, 'getAccountNumber').and.callThrough();
+        // Act
+        testAccount.printAccountDetails();
+        // Assert
+        expect(testAccount.getAccountNumber).toHaveBeenCalled();
+    })
+
+    it("should have a printer that calls getOverdraftDetails", () => {
+        // Arrange
+        spyOn(testAccount, 'getOverdraftDetails').and.callThrough();
+        // Act
+        testAccount.printAccountDetails();
+        // Assert
+        expect(testAccount.getOverdraftDetails).toHaveBeenCalled();
+    })
+
+    it("should have a printer that calls currentAvailable", () => {
+        // Arrange
+        spyOn(testAccount, 'currentAvailable').and.callThrough();
+        // Act
+        testAccount.printAccountDetails();
+        // Assert
+        expect(testAccount.currentAvailable).toHaveBeenCalled();
+    })
 });

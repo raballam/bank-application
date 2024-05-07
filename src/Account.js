@@ -1,18 +1,30 @@
 import Transaction from "./Transaction.js";
 export default class Account {
+    static accountNumberGen = 12348765;
     constructor(name) {
         if (name === null) throw new Error("Name cannot be null");
         this.name = name;
+        this.accountNumber = ++Account.accountNumberGen;
+
+        // Initialize private instance variables
+        this.#name = name;
+        this.#accountNumber = this.accountNumber;
+        this.#balance = 0;
     };
     #name;
     #balance = 0;
+    #accountNumber;
     transactions = [];
     overdraftEnabled = false;
     overdraftLimit;
 
     getName() {
         return this.#name;
-    }
+    };
+
+    getAccountNumber() {
+        return this.#accountNumber;
+    };
 
     getBalance() {
         return this.#balance;
@@ -46,7 +58,20 @@ export default class Account {
         this.overdraftLimit = limit;
     };
 
+    getOverdraftDetails() {
+        if (!this.overdraftEnabled) return "N/A";
+        return this.overdraftLimit;
+    };
+
+    currentAvailable() {
+        return this.overdraftEnabled ? this.getBalance() + this.overdraftLimit : this.getBalance();
+    };
+
     printAccountDetails() {
-        console.log(`${this.getName()}`);
-    }
+        console.log(`Account Name: ${this.getName()}
+        Account Number: ${this.getAccountNumber()}
+        Overdraft Limit: £${this.getOverdraftDetails()}
+        Available Balance: £${this.currentAvailable()}`);
+    };
+
  };
